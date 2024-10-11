@@ -1,47 +1,84 @@
-import React, { useState } from 'react';
-import './HireMe.css'; // Add your CSS for styling the form
+import React from 'react';
+import { useForm, ValidationError } from '@formspree/react';
+import './HireMe.css'; // Make sure to include your CSS for styling the form
 
 function HireMe() {
-  const [submitted, setSubmitted] = useState(false);
+  // Initialize the form with the Formspree form ID
+  const [state, handleSubmit] = useForm("movqqqap"); // Replace with your Formspree form ID
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true); // Show the thank you message
-  };
+  // If the submission is successful, display a thank you message
+  if (state.succeeded) {
+    return <div className="thank-you-message"><h2>Thank you! We'll be in touch soon.</h2></div>;
+  }
 
   return (
     <div className="hire-me-modal">
-      {submitted ? (
-        <div className="thank-you-message">
-          <h2>Thank you! We'll be in touch soon.</h2>
-        </div>
-      ) : (
-        <form
-          className="hire-me-form"
-          action="https://formspree.io/f/movqqqap"  // Your actual Formspree form URL
-          method="POST"
-          onSubmit={handleSubmit}
-        >
-          <h2>Hire Me</h2>
-          <label>
-            Recruiter Name:
-            <input type="text" name="recruiterName" required />
-          </label>
-          <label>
-            Recruiter Email:
-            <input type="email" name="recruiterEmail" required />
-          </label>
-          <label>
-            Company Name:
-            <input type="text" name="companyName" required />
-          </label>
-          <label>
-            Job Details:
-            <textarea name="jobDetails" required />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
-      )}
+      <form className="hire-me-form" onSubmit={handleSubmit}>
+        <h2>Hire Me</h2>
+
+        <label htmlFor="recruiterName">
+          Recruiter Name:
+        </label>
+        <input
+          id="recruiterName"
+          type="text"
+          name="recruiterName"
+          required
+        />
+        <ValidationError 
+          prefix="Recruiter Name" 
+          field="recruiterName"
+          errors={state.errors}
+        />
+
+        <label htmlFor="recruiterEmail">
+          Recruiter Email:
+        </label>
+        <input
+          id="recruiterEmail"
+          type="email"
+          name="recruiterEmail"
+          required
+        />
+        <ValidationError 
+          prefix="Email" 
+          field="recruiterEmail"
+          errors={state.errors}
+        />
+
+        <label htmlFor="companyName">
+          Company Name:
+        </label>
+        <input
+          id="companyName"
+          type="text"
+          name="companyName"
+          required
+        />
+        <ValidationError 
+          prefix="Company Name" 
+          field="companyName"
+          errors={state.errors}
+        />
+
+        <label htmlFor="jobDetails">
+          Job Details:
+        </label>
+        <textarea
+          id="jobDetails"
+          name="jobDetails"
+          required
+        />
+        <ValidationError 
+          prefix="Job Details" 
+          field="jobDetails"
+          errors={state.errors}
+        />
+
+        <button type="submit" disabled={state.submitting}>
+          Submit
+        </button>
+      </form>
     </div>
   );
 }
