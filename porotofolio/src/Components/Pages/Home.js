@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import styled, { keyframes } from 'styled-components';
-import { bounce, fadeIn } from 'react-animations'; // Example animation imports
+import { bounce, fadeIn } from 'react-animations';
+import HireMe from '../hireme/hireme'; // Import HireMe component
 
 const imageSource = require('../Images/My photo.jpg');
 
 function Home() {
   const [fullstackText, setFullstackText] = useState('Fullstack');
+  const [isHireMeOpen, setIsHireMeOpen] = useState(false); // State for modal visibility
   const textOptions = ['Frontend', 'Backend'];
 
   useEffect(() => {
@@ -14,34 +16,51 @@ function Home() {
     const interval = setInterval(() => {
       currentIndex = (currentIndex + 1) % textOptions.length;
       setFullstackText(textOptions[currentIndex]);
-    }, 2000); // Smooth interval change
+    }, 2000);
 
     return () => clearInterval(interval);
   }, []);
 
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
+  // Function to toggle modal visibility
+  const toggleHireMeModal = () => {
+    setIsHireMeOpen(!isHireMeOpen);
+  };
+
   return (
-    <HomeContainer isMobile={isMobile}>
-      <LeftSection>
-        <ProfileImage src={imageSource} alt="Your Name" />
-      </LeftSection>
-      <RightSection>
-        <Title>
-          I'm a <DynamicText>{fullstackText}</DynamicText> Developer
-        </Title>
-        <Description>
-          I am a passionate fullstack Developer with expertise in both frontend and backend technologies. My goal is to
-          deliver scalable, flexible, and user-friendly web applications.
-        </Description>
-        <CTAButtons>
-          <DownloadButton href="https://drive.google.com/file/d/1MFaPWQbhYBQc-2dJ4oVwCeO41aYGBL_b/view?usp=drive_link">
-            Download Resume
-          </DownloadButton>
-          <HireButton>Hire Me</HireButton>
-        </CTAButtons>
-      </RightSection>
-    </HomeContainer>
+    <>
+      <HomeContainer isMobile={isMobile}>
+        <LeftSection>
+          <ProfileImage src={imageSource} alt="Your Name" />
+        </LeftSection>
+        <RightSection>
+          <Title>
+            I'm a <DynamicText>{fullstackText}</DynamicText> Developer
+          </Title>
+          <Description>
+            I am a passionate fullstack Developer with expertise in both frontend and backend technologies. My goal is to
+            deliver scalable, flexible, and user-friendly web applications.
+          </Description>
+          <CTAButtons>
+            <DownloadButton href="https://drive.google.com/file/d/1W0vXdvyAISNdTPQRoVs6yFfN4caK0ro7/view?usp=sharing">
+              Download Resume
+            </DownloadButton>
+            <HireButton onClick={toggleHireMeModal}>Hire Me</HireButton>
+          </CTAButtons>
+        </RightSection>
+      </HomeContainer>
+
+      {/* Conditionally render HireMe component as a modal */}
+      {isHireMeOpen && (
+        <ModalOverlay onClick={toggleHireMeModal}>
+          <ModalContent onClick={(e) => e.stopPropagation()}>
+            <HireMe />
+            <CloseButton onClick={toggleHireMeModal}>X</CloseButton>
+          </ModalContent>
+        </ModalOverlay>
+      )}
+    </>
   );
 }
 
@@ -64,7 +83,6 @@ const HomeContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   min-height: 100vh;
-
 `;
 
 const LeftSection = styled.div`
@@ -83,8 +101,7 @@ const ProfileImage = styled.img`
   object-fit: cover;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease;
-   margin-top: 2cm;
-   margin-left:20px;
+  margin-top: 2cm;
 
   &:hover {
     transform: scale(1.1) rotate(5deg);
@@ -101,29 +118,28 @@ const RightSection = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 3rem; // Increased font size for better visibility
+  font-size: 3rem;
   color: #fff;
   margin-bottom: 1rem;
   text-align: center;
-  text-transform: uppercase; // Makes the title fully uppercase for a bold impact
-  letter-spacing: 0.1rem; // Adds spacing between letters for a more spacious look
-  background: linear-gradient(90deg, #00DBDE, #FC00FF); // Gradient text
-  -webkit-background-clip: text; // Ensures gradient text effect is visible
-  color: transparent; // Text color is transparent to show the gradient
-  text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3); // Adds depth with shadow
-  transition: all 0.3s ease; // Smooth transition for hover effects
-  position: relative; // Needed for pseudo-element below
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  background: linear-gradient(90deg, #00dbde, #fc00ff);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
 
   &:hover {
-    transform: scale(1.05); // Slightly enlarges on hover for an interactive effect
-    text-shadow: 4px 6px 8px rgba(0, 0, 0, 0.5); // Increases the shadow effect on hover
+    transform: scale(1.05);
+    text-shadow: 4px 6px 8px rgba(0, 0, 0, 0.5);
   }
 
-  // Adding a decorative underline effect on hover
   &::before {
     content: "";
     position: absolute;
-    bottom: -10px; // Adjust this to match the distance from the text
+    bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
     width: 0%;
@@ -133,18 +149,17 @@ const Title = styled.h1`
   }
 
   &:hover::before {
-    width: 100%; // Expands underline on hover
+    width: 100%;
   }
 
   @media (max-width: 768px) {
-    font-size: 2rem; // Adjusts font size for tablets and smaller screens
+    font-size: 2rem;
   }
 
   @media (max-width: 480px) {
-    font-size: 1.5rem; // Adjusts font size for mobile screens
+    font-size: 1.5rem;
   }
 `;
-
 
 const DynamicText = styled.span`
   color: #61dafb;
@@ -191,5 +206,43 @@ const HireButton = styled.button`
   &:hover {
     transform: scale(1.1);
     background-color: #ddd;
+  }
+`;
+
+// Modal Styles
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ModalContent = styled.div`
+  position: relative;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #000;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #ff0000;
   }
 `;

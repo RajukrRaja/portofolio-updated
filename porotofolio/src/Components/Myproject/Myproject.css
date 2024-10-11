@@ -11,9 +11,10 @@
   font-size: 3rem;
   margin-bottom: 2rem;
   animation: fadeInDown 1s ease-in;
-  background: linear-gradient(to right, #61dafb, #21a1f1);
-  -webkit-background-clip: text;
-  color: transparent;
+
+
+
+
 }
 
 /* Project Grid Layout */

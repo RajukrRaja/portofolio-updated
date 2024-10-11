@@ -1,0 +1,59 @@
+.hire-me-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8); /* Dim background */
+    padding: 20px;
+  }
+  
+  .hire-me-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .hire-me-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .hire-me-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .hire-me-form input,
+  .hire-me-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .hire-me-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .hire-me-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .thank-you-message {
+    color: white;
+    text-align: center;
+  }
+  
