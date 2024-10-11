@@ -1,0 +1,40 @@
+/* MyBlog.jsx */
+
+.blogs {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .blog {
+    border: 1px solid #e0e0e0;
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(248, 248, 248, 0.1);
+  }
+  
+  .blog h2 {
+    font-size: 24px;
+    margin: 0;
+    color: #333;
+  }
+  
+  .blog p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  /* Optional: Add hover effect */
+  .blog:hover {
+    transform: translateY(-3px);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  /* Optional: Style the heading */
+  .blogs h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  

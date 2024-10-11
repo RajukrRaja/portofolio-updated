@@ -1,0 +1,107 @@
+/* Contact.css */
+
+/* Global styling */
+body {
+  font-family: 'Poppins', sans-serif; /* Clean font */
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0; /* Light background */
+  color: #333; /* Dark text color */
+}
+
+/* Container styling */
+.contact-container {
+  display: flex;
+  justify-content: center; /* Centering the content */
+  align-items: center; /* Vertical alignment */
+  min-height: 100vh; /* Full viewport height */
+  padding: 20px;
+  margin-top: 2cm; /* Padding around the container */
+}
+
+/* Form styling */
+.contact-form {
+  background-color: white; /* White background for the form */
+  padding: 2rem; /* Spacious padding */
+  border-radius: 12px; /* Rounded corners */
+  width: 90%; /* Responsive width */
+  max-width: 400px; /* Max width for larger screens */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  transition: transform 0.3s ease; /* Transition for scale effect */
+}
+
+.contact-form:hover {
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Header styling */
+.contact-form h2 {
+  margin-bottom: 20px; /* Spacing below the heading */
+  color: #007bff; /* Accent color for the heading */
+  text-align: center; /* Center the heading */
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 15px; /* Spacing below each form group */
+}
+
+/* Input field styling */
+.input-field {
+  width: 100%; /* Full width */
+  padding: 12px; /* Padding for input fields */
+  margin-bottom: 10px; /* Spacing below each input */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 8px; /* Rounded corners */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.input-field:focus {
+  border-color: #007bff; /* Change border color on focus */
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Box shadow on focus */
+}
+
+/* Button styling */
+.btn-submit {
+  width: 100%; /* Full width */
+  padding: 12px; /* Padding for the button */
+  background-color: #28a745; /* Green background for submit button */
+  color: white; /* Text color */
+  border: none; /* No border */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+  font-weight: bold; /* Bold text */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+.btn-submit:hover {
+  background-color: #218838; /* Darker shade on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Back button styling */
+.btn-back {
+  display: block; /* Block display for link */
+  width: 100%; /* Full width */
+  padding: 12px; /* Padding for back button */
+  background-color: #eee; /* Light background */
+  color: black; /* Text color */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 8px; /* Rounded corners */
+  text-align: center; /* Center the text */
+  text-decoration: none; /* Remove underline */
+  margin-top: 10px; /* Margin above */
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.btn-back:hover {
+  background-color: #ddd; /* Darker shade on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .contact-form {
+      width: 90%; /* Adjust width for smaller screens */
+  }
+}

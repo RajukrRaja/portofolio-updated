@@ -1,0 +1,253 @@
+/* Navbar.module.css */
+
+/* Variables for Light and Dark Modes */
+:root {
+  --navbar-bg: #fff;
+  --navbar-text: #333;
+  --active-link-bg: #f0f0f0;
+  --dropdown-bg: #fff;
+  --dropdown-text: #333;
+  --search-btn-bg: #f0f0f0;
+}
+
+body.dark-mode {
+  --navbar-bg: #333;
+  --navbar-text: #fff;
+  --active-link-bg: #555;
+  --dropdown-bg: #444;
+  --dropdown-text: #fff;
+  --search-btn-bg: #555;
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* Navbar Styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: var(--navbar-bg);
+  color: var(--navbar-text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+}
+
+.toggleButton {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  display: none; /* Hidden on larger screens */
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menuItem {
+  margin-left: 1rem;
+  position: relative;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.activeLink {
+  background-color: var(--active-link-bg);
+}
+
+.dropdownButton {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--dropdown-bg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+  min-width: 200px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.dropdownMenu.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdownItem {
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: var(--dropdown-text);
+  display: block;
+  transition: background-color 0.3s;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.searchInput {
+  padding: 0.5rem;
+  border-radius: 4px 0 0 4px;
+  border: 1px solid #ccc;
+  outline: none;
+  min-width: 150px;
+}
+
+.searchButton {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+  background-color: var(--search-btn-bg);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.darkModeButton {
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Hidden by default */
+  width: 250px;
+  height: 100%;
+  background-color: var(--navbar-bg);
+  color: var(--navbar-text);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  transition: left 0.3s;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.closeButton {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+.sidebarMenu {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+  flex-grow: 1;
+}
+
+.sidebarMenuItem {
+  margin-bottom: 1rem;
+}
+
+.sidebarLink {
+  text-decoration: none;
+  color: inherit;
+  padding: 0.5rem;
+  border-radius: 4px;
+  display: block;
+  transition: background-color 0.3s;
+}
+
+/* Overlay Styles */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: width 0.3s;
+  z-index: 998;
+  overflow: hidden;
+}
+
+.overlay.show {
+  width: 100%;
+}
+
+/* Hover Effects */
+.link:hover,
+.button:hover,
+.dropdownItem:hover,
+.sidebarLink:hover,
+.dropdownButton:hover {
+  background-color: var(--active-link-bg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .toggleButton {
+    display: block; /* Show toggle button on mobile */
+  }
+
+  .menu {
+    display: none; /* Hide menu on mobile */
+  }
+
+  .searchContainer {
+    display: none; /* Hide search on mobile */
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar {
+    display: none; /* Hide sidebar on larger screens */
+  }
+
+  .overlay {
+    display: none; /* Hide overlay on larger screens */
+  }
+}

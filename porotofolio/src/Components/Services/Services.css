@@ -1,0 +1,230 @@
+/* General container styling */
+body {
+  background-color: #f0f0f0;
+  transition: background-color 0.5s ease;
+}
+
+.service-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  margin-top: 1cm;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  margin-top: 2cm;
+}
+
+.tab {
+  padding: 15px 30px;
+  background-color: #eaeaea;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  margin: 0 10px;
+  color: #333;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  position: relative;
+}
+
+.tab:hover {
+  background-color: #61dafb;
+  color: white;
+  transform: scale(1.05);
+}
+
+.tab.active {
+  background-color: #21a1f1;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(33, 161, 241, 0.6);
+}
+
+/* Full width service cards */
+.service {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s ease, box-shadow 0.3s ease;
+  width: 100%; /* Full width of the container */
+  margin-bottom: 20px; /* Spacing between cards */
+  position: relative;
+  perspective: 1000px;
+}
+
+.service:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Add hover flip effect */
+.service-front,
+.service-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transition: transform 0.6s ease;
+}
+
+.service-back {
+  transform: rotateY(180deg);
+}
+
+.service:hover .service-front {
+  transform: rotateY(180deg);
+}
+
+.service:hover .service-back {
+  transform: rotateY(360deg);
+}
+
+/* Tooltip for tabs */
+.tab-tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tab:hover .tab-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: #fff;
+  border: 2px solid #333;
+  padding: 5px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+body.dark-mode {
+  background-color: #333;
+  color: white;
+}
+
+body.dark-mode .service {
+  background-color: #444;
+  color: white;
+}
+
+body.dark-mode .tab {
+  background-color: #666;
+  color: white;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #eaeaea;
+  border: none;
+  padding: 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #61dafb;
+}
+/* Full width service cards with margins and border radius */
+.service {
+  margin-top: 20px;
+  margin-left: 15px; /* Left margin */
+  margin-right: 15px; /* Right margin */
+  padding: 20px;
+  background: linear-gradient(135deg, #ffffff, #f8f9fa); /* Subtle gradient background */
+  border-radius: 15px; /* Increased border radius for a modern look */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  width: calc(100% - 30px); /* Adjust width to account for left and right margins */
+  margin-bottom: 20px; /* Spacing between cards */
+  position: relative;
+  perspective: 1000px;
+}
+
+/* Hover effect for the card */
+.service:hover {
+  transform: translateY(-5px); /* Lift the card slightly on hover */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #eaeaea, #ffffff); /* Change gradient on hover */
+}
+
+/* Add flip effect */
+.service-front,
+.service-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transition: transform 0.6s ease;
+  border-radius: 15px; /* Ensure the back also has rounded corners */
+}
+
+/* Service back styling */
+.service-back {
+  transform: rotateY(180deg);
+  background: #f8f9fa; /* Background color for the back side */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Titles and descriptions */
+.service h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.service p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #666;
+}
+
+/* Icons for service cards */
+.service-icon {
+  font-size: 50px; /* Icon size */
+  color: #21a1f1; /* Color for the icon */
+  margin-bottom: 15px;
+}
+
+/* Hover flip effect */
+.service:hover .service-front {
+  transform: rotateY(180deg);
+}
+
+.service:hover .service-back {
+  transform: rotateY(360deg);
+}
