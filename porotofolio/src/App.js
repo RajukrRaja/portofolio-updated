@@ -8,6 +8,7 @@ import Contact from './Components/Pages/Contact';
 import Myproject from './Components/Myproject/Myproject'
 import Footer from './Components/Footer/Footer';
 import Info from './Components/Info/Info';
+import Skill from './Components/skill/skill';
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
       </Routes>
       <Info/>
  
-   
+   <Skill/>
 
       <Myproject/>
       <About/>

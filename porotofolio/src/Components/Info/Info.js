@@ -16,9 +16,9 @@ function Info() {
 
   return (
     <div className={`info-container ${isMobile ? 'mobile' : ''}`}>
-      <h2 className="section-title">
+      <h3 className="section-title">
         <span className="typing-animation">🎓 My Education</span>
-      </h2>
+      </h3>
      
       <div className="education-cards">
         {[

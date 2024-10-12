@@ -1,180 +1,276 @@
-/* General Styles */
 .project-container {
-  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #f0f0f0, #ffffff);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
   text-align: center;
-  background: linear-gradient(135deg, #f4f4f4, #e0e0e0); /* Subtle gradient background */
-  min-height: 100vh;
-  position: relative;
+  margin-bottom: 40px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  color: #333;
 }
 
-.heading h1 {
-  font-size: 3rem;
-  margin-bottom: 2rem;
-  animation: fadeInDown 1s ease-in;
-
-
-
-
-}
-
-/* Project Grid Layout */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
-  padding-bottom: 2rem;
 }
 
-/* Project Card Styles */
 .project-card {
-  background-color: #fff;
-  border-radius: 15px;
+  background: #0fb8a7;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(145, 5, 188, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   cursor: pointer;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.project-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
+.card-inner {
+  position: relative;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  transition: opacity 0.3s ease;
-  opacity: 0;
-  z-index: 1;
-}
-
-.project-card:hover::before {
-  opacity: 1;
 }
 
 .project-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.project-image-container {
+  position: relative;
+  width: 100%;
 }
 
 .project-image {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: opacity 0.5s;
 }
 
-.project-card:hover .project-image {
-  transform: scale(1.1);
-  filter: brightness(80%);
-}
-
-/* Project Content */
-.project-content {
-  padding: 1.5rem;
-  text-align: left;
-  z-index: 2;
-  position: relative;
-}
-
-.project-content h2 {
-  margin: 0.5rem 0;
-  color: #333;
-  font-size: 1.5rem;
-}
-
-.project-description {
-  color: #555;
-  font-size: 0.9rem;
-  max-height: 40px;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-}
-
-.project-description.expanded {
-  max-height: 200px;
-}
-
-/* View Details Button */
-.view-details-button {
-  background-color: #61dafb;
-  border: none;
-  color: white;
-  padding: 0.5rem 1.5rem;
-  border-radius: 50px;
-  cursor: pointer;
-  margin-top: 1rem;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.view-details-button:hover {
-  background-color: #21a1f1;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Hover Overlay Text */
-.project-card .overlay-text {
+.image-overlay {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
   color: white;
-  font-size: 1.2rem;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 3;
-}
-
-.project-card:hover .overlay-text {
-  opacity: 1;
-}
-
-/* Animations */
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Floating Action Button */
-.fab {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background-color: #61dafb;
-  color: white;
-  font-size: 1.5rem;
-  width: 50px;
-  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.project-image-container:hover .image-overlay {
+  opacity: 1;
+}
+
+.project-content {
+  padding: 15px;
+  position: relative;
+  z-index: 1;
+  transition: background 0.3s;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #bcff05;
+}
+
+.tech-stack {
+  margin: 10px 0;
+}
+
+.tech-tag {
+  display: inline-block;
+  background: #61dafb;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 5px;
+  color: #282c34;
+  font-size: 0.9rem;
+  position: relative;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.tech-tag:hover {
+  background: #21a1f1;
+  transform: translateY(-3px);
+}
+
+.project-description {
+  max-height: 0;
+  overflow: hidden;
+  color: #bcff05;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.project-description.expanded {
+  max-height: 200px; /* Adjust based on content length */
+  padding: 10px 0; /* Add padding when expanded */
+}
+
+.view-details-button {
+  background: #61dafb;
+  color: #282c34;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
+  transition: background 0.3s, transform 0.2s;
+  font-weight: bold;
 }
 
-.fab:hover {
-  background-color: #21a1f1;
+.view-details-button:hover {
+  background: #21a1f1;
+  transform: translateY(-2px);
 }
 
-/* Responsive Design */
+.project-links {
+  margin-top: 10px;
+}
+
+.project-links a {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  color: #61dafb;
+  text-decoration: none;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.project-links a:hover {
+  color: #21a1f1;
+  transform: translateY(-2px);
+}
+
+.project-footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.project-footer a {
+  color: #61dafb;
+}
+
+.project-footer a:hover {
+  color: #21a1f1;
+}
+
 @media (max-width: 768px) {
-  .project-grid {
-    grid-template-columns: 1fr;
+  .project-card {
+    padding: 15px;
   }
+  
+  h2 {
+    font-size: 1.3rem;
+  }
+  
+  .tech-tag {
+    font-size: 0.8rem;
+  }
+}
+/* Background Animation for Project Container */
+.project-container {
+  animation: fadeIn 1s ease-in-out; /* Fade-in effect for the project container */
+}
 
-  .fab {
-    bottom: 20px;
-    right: 20px;
+/* Card Hover Animation */
+.project-card:hover {
+  transform: scale(1.05) translateY(-2px); /* Slight scale effect on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Increase shadow on hover */
+}
+
+/* Image Overlay Transition */
+.image-overlay {
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s ease-in-out; /* Smooth transition for overlay */
+}
+
+.project-image-container:hover .image-overlay {
+  opacity: 1; /* Show overlay on image hover */
+}
+
+/* Tech Tag Styling */
+.tech-tag {
+  font-weight: bold; /* Make tech tags bold */
+  transition: transform 0.2s, box-shadow 0.2s; /* Smooth transitions */
+}
+
+.tech-tag:hover {
+  transform: scale(1.1); /* Slightly enlarge tech tags on hover */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+}
+
+/* View Details Button Hover Effect */
+.view-details-button {
+  position: relative; /* Position for absolute elements inside */
+}
+
+.view-details-button:hover::after {
+  content: ""; /* Create a pseudo-element */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1); /* Light overlay effect */
+  border-radius: 5px; /* Match button corners */
+  transition: opacity 0.3s; /* Smooth transition */
+  opacity: 0; /* Initially hidden */
+}
+
+.view-details-button:hover::after {
+  opacity: 1; /* Show overlay on hover */
+}
+
+/* Footer Styles */
+.project-footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #666;
+  padding: 10px 0; /* Padding for better spacing */
+  background: rgba(255, 255, 255, 0.9); /* Light background for footer */
+  border-top: 1px solid #ddd; /* Top border for separation */
+}
+
+/* Loading Spinner Styles */
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #61dafb;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite; /* Rotate effect */
+}
+
+/* Keyframe for spinner */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Fade-in Animation for Project Container */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

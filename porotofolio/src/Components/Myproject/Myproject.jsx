@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Myproject.css';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 function MyProject() {
   const [isExpanded, setIsExpanded] = useState({});
@@ -14,24 +15,36 @@ function MyProject() {
   const projects = [
     {
       title: "SWAPSHILD: Deep Fake Face Swap Detection",
-      description: "Developed an application using React, Redux, and SCSS to detect deep fake face swaps. The project improved the processing speed by 30% through optimized image loading techniques. This solution aims to tackle the growing issue of deep fake videos by providing a platform that scans media and detects falsified content.",
+      description: "Developed an application using React, Redux, and SCSS to detect deep fake face swaps. The project improved processing speed by 30% through optimized image loading techniques.",
+      techStack: ["React", "Redux", "SCSS"],
       img: "https://4kwallpapers.com/images/walls/thumbs_3t/5661.jpg",
+      github: "https://github.com/example/swapshild",
+      liveDemo: "https://example.com/swapshild",
     },
     {
       title: "SNAPNEST: Social Media Application",
-      description: "Led a hackathon project utilizing HTML, Tailwind CSS, React.js, Node.js, Express.js, and MongoDB. Implemented features such as user authentication, real-time notifications, and content sharing. These features increased user engagement by 40%. The application focused on ensuring a seamless social media experience with a modern, responsive design.",
+      description: "Led a hackathon project utilizing HTML, Tailwind CSS, React.js, Node.js, Express.js, and MongoDB. Implemented user authentication and real-time notifications.",
+      techStack: ["HTML", "Tailwind CSS", "React.js", "Node.js", ],
       img: "https://4kwallpapers.com/images/walls/thumbs_3t/5661.jpg",
+      github: "https://github.com/example/snapnest",
+      liveDemo: "https://example.com/snapnest",
     },
     {
       title: "TRIVDENTA: AI Medicine Recommendation",
-      description: "Created an AI-driven application using React.js, Node.js, Express.js, Socket.io, and MongoDB. The system provides real-time medicine recommendations based on user symptoms. Optimized response times by 25% with efficient query handling, making it easier for users to receive timely recommendations.",
+      description: "Created an AI-driven application using React.js, Node.js, and MongoDB. Provides real-time medicine recommendations based on user symptoms.",
+      techStack: ["React.js", "Node.js", "MongoDB"],
       img: "https://4kwallpapers.com/images/walls/thumbs_3t/5661.jpg",
+      github: "https://github.com/example/trivdenta",
+      liveDemo: "https://example.com/trivdenta",
     },
     {
       title: "CODEBOOSTER: Coding Challenge Platform",
-      description: "Developed an interactive platform for coding challenges, allowing users to practice and improve their algorithmic skills. Built using React.js, Node.js, and MongoDB, the platform features a real-time coding editor, leaderboards, and achievement tracking. Integrated a scoring system and automated code evaluation. The platform increased user engagement by 50% and was adopted by over 500 active users in the first month of launch.",
+      description: "Developed an interactive platform for coding challenges. Integrated a real-time coding editor and leaderboards to improve user engagement.",
+      techStack: ["React.js", "Node.js", "MongoDB"],
       img: "https://4kwallpapers.com/images/walls/thumbs_3t/5661.jpg",
-    }
+      github: "https://github.com/example/codebooster",
+      liveDemo: "https://example.com/codebooster",
+    },
   ];
 
   return (
@@ -42,19 +55,43 @@ function MyProject() {
       <div className="project-grid">
         {projects.map((project, index) => (
           <div key={index} className="project-card" onClick={() => toggleExpand(index)}>
-            <img src={project.img} alt={project.title} className="project-image" />
-            <div className="project-content">
-              <h2>{project.title}</h2>
-              <p className={`project-description ${isExpanded[index] ? 'expanded' : ''}`}>
-                {project.description}
-              </p>
-              <button className="view-details-button">
-                {isExpanded[index] ? "Hide Details" : "View Details"}
-              </button>
+            <div className="card-inner">
+              <div className="project-image-container">
+                <img src={project.img} alt={project.title} className="project-image" />
+                <div className="image-overlay">
+                  <h2>{project.title}</h2>
+                </div>
+              </div>
+              <div className="project-content">
+                <div className="tech-stack">
+                  {project.techStack.map((tech, idx) => (
+                    <span key={idx} className="tech-tag">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <p className={`project-description ${isExpanded[index] ? 'expanded' : ''}`}>
+                  {project.description}
+                </p>
+                <button className="view-details-button">
+                  {isExpanded[index] ? "Hide Details" : "View Details"}
+                </button>
+                {isExpanded[index] && (
+                  <div className="project-links">
+                    <a href={project.github} target="_blank" rel="noopener noreferrer">
+                      <FaGithub /> GitHub
+                    </a>
+                    <a href={project.liveDemo} target="_blank" rel="noopener noreferrer">
+                      <FaExternalLinkAlt /> Live Demo
+                    </a>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         ))}
       </div>
+     
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import styled, { ThemeProvider, keyframes, createGlobalStyle } from 'styled-components';
 import Sidebar from '../sidebar/sidebar';
 import { FaBars, FaBell, FaUserCircle, FaMoon, FaSun } from 'react-icons/fa';
+import Notification from '../notifiaction/notification'; // Import the Notification component
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -77,10 +78,7 @@ const Navbar = () => {
               placeholder="Search..."
             />
           </SearchForm>
-          <BellIcon>
-            <FaBell />
-            <NotificationBadge>3</NotificationBadge>
-          </BellIcon>
+          <Notification /> {/* Notification component */}
           <Profile>
             <FaUserCircle />
             <ProfileDropdown>
@@ -174,8 +172,7 @@ const Nav = styled.nav`
   width: 100%;
   top: 0;
   z-index: 1000;
-  box-shadow: ${({ isScrolled, theme }) =>
-    isScrolled ? `0 2px 10px ${theme.shadow}` : 'none'};
+  box-shadow: ${({ isScrolled, theme }) => (isScrolled ? `0 2px 10px ${theme.shadow}` : 'none')};
   transition: all 0.3s ease;
 `;
 
@@ -275,8 +272,8 @@ const ScrollIndicator = styled.div`
   z-index: 1001;
   animation: ${smoothWidth} 0.5s ease;
 `;
-// Define the missing styled-components
 
+// Define the missing styled-components
 const Dropdown = styled.div`
   position: relative;
 
@@ -293,7 +290,6 @@ const DropdownContent = styled.div`
   top: 100%;
   box-shadow: 0 2px 10px ${({ theme }) => theme.shadow};
   border-radius: 8px;
-  flex-direction: column;
 
   a {
     padding: 0.5rem 1rem;
@@ -341,17 +337,6 @@ const SearchInput = styled.input`
   }
 `;
 
-const NotificationBadge = styled.span`
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background: red;
-  color: white;
-  font-size: 0.8rem;
-  padding: 2px 6px;
-  border-radius: 50%;
-`;
-
 const Profile = styled.div`
   position: relative;
   cursor: pointer;
@@ -377,6 +362,3 @@ const LogoutButton = styled.button`
 `;
 
 export default Navbar;
-
-
-
