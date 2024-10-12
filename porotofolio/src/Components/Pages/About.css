@@ -5,6 +5,9 @@
   font-family: 'Arial', sans-serif;
   transition: background 0.5s ease;
   min-height: 100vh;
+  position: relative; /* For positioning pseudo-elements */
+  overflow: hidden;
+  margin-top: 3cm; /* Prevent overflow of shadows */
 }
 
 body {
@@ -18,6 +21,11 @@ body {
   margin: 0 auto;
   text-align: center;
   animation: fadeInUp 1s ease-in-out; /* Fade-in effect on load */
+  position: relative; /* For pseudo-elements */
+  background: rgba(255, 255, 255, 0.9); /* Slight white background */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  padding: 20px;
 }
 
 .about-content h1 {
@@ -28,6 +36,9 @@ body {
   letter-spacing: 2px;
   position: relative;
   display: inline-block;
+  background: linear-gradient(90deg, #61dafb, #21a1f1); /* Gradient text */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .about-content h1::after {
@@ -66,7 +77,7 @@ body {
   cursor: pointer;
   font-size: 1.1rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Add transform */
   text-transform: uppercase;
   letter-spacing: 1.5px;
 }
@@ -74,6 +85,7 @@ body {
 .about-button:hover {
   background-color: #21a1f1;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px); /* Lift effect on hover */
 }
 
 /* Animations */
@@ -96,7 +108,7 @@ body {
 
 /* Hover Effects */
 .about-container:hover {
-  background: linear-gradient(135deg, #e9ecef, #f8f9fa);
+  background: linear-gradient(135deg, #e9ecef, #dee2e6);
 }
 
 .about-content h1:hover {
@@ -127,6 +139,7 @@ body {
     overflow-x: hidden !important;
   }
 }
+
 /* Divider Animation */
 .divider {
   width: 80px;
@@ -146,28 +159,9 @@ body {
   }
 }
 
-/* Hover Effect on About Container */
-.about-container:hover {
-  background: linear-gradient(135deg, #e9ecef, #dee2e6);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: background 0.5s ease;
-}
-
-/* Button Styles */
-.about-button {
-  background-color: #61dafb;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.about-button:hover {
-  background-color: #21a1f1;
-  transform: scale(1.1);
+/* Background Glow on Hover */
+.about-content h1:hover {
+  text-shadow: 0 4px 15px rgba(97, 218, 251, 0.5);
 }
 
 /* Text Hover Effect */
@@ -177,39 +171,8 @@ body {
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Heading Animation */
-.about-content h1 {
-  animation: fadeInUp 1.5s ease-in-out;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Background Glow on Hover */
-.about-content h1:hover {
-  text-shadow: 0 4px 15px rgba(97, 218, 251, 0.5);
-}
-
-/* Responsive Text Scaling */
-@media (max-width: 767px) {
-  .about-content h1 {
-    font-size: 2rem;
-  }
-
-  .about-content p {
-    font-size: 1rem;
-  }
-
-  .about-button {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-  }
+/* Focus States */
+.about-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(97, 218, 251, 0.5); /* Outline on focus */
 }
