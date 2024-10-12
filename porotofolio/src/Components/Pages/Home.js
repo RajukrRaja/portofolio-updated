@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import styled, { keyframes } from 'styled-components';
 import { bounce, fadeIn } from 'react-animations';
+import { FaLinkedin, FaGithub, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { SiLeetcode } from 'react-icons/si';
 import HireMe from '../hireme/hireme'; // Import HireMe component
 
 const imageSource = require('../Images/My photo.jpg');
@@ -48,6 +50,24 @@ function Home() {
             </DownloadButton>
             <HireButton onClick={toggleHireMeModal}>Hire Me</HireButton>
           </CTAButtons>
+
+          <SocialIcons>
+            <SocialLink href="https://www.linkedin.com/in/raju-kumar-raja/" target="_blank">
+              <FaLinkedin />
+            </SocialLink>
+            <SocialLink href="https://leetcode.com/profile/account/" target="_blank">
+              <SiLeetcode />
+            </SocialLink>
+            <SocialLink href="https://github.com/RajukrRaja" target="_blank">
+              <FaGithub />
+            </SocialLink>
+            <SocialLink href="https://www.instagram.com/" target="_blank">
+              <FaInstagram />
+            </SocialLink>
+            <SocialLink href="https://x.com/RAJUKUM81888402" target="_blank">
+              <FaTwitter />
+            </SocialLink>
+          </SocialIcons>
         </RightSection>
       </HomeContainer>
 
@@ -94,20 +114,40 @@ const LeftSection = styled.div`
   animation: ${fadeInAnimation} 1.5s ease-in-out;
 `;
 
+// Define enlarge and glow animation for profile image
+const enlargeAndGlow = keyframes`
+  0% {
+    transform: scale(1) rotate(0deg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    transform: scale(1.2) rotate(0deg);
+    box-shadow: 0 0 30px rgba(97, 218, 251, 0.7),
+                0 0 60px rgba(97, 218, 251, 0.5),
+                0 0 90px rgba(97, 218, 251, 0.3);
+  }
+  100% {
+    transform: scale(1.1) rotate(0deg);
+    box-shadow: 0 0 15px rgba(97, 218, 251, 0.7),
+                0 0 30px rgba(97, 218, 251, 0.5),
+                0 0 45px rgba(97, 218, 251, 0.3);
+  }
+`;
+
 const ProfileImage = styled.img`
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease;
-  margin-top: 2cm;
+  margin-top: 3rem;
+   animation: ${enlargeAndGlow} 0.8s forwards; 
 
   &:hover {
-    transform: scale(1.1) rotate(5deg);
+   /* Apply the enlarge and glow animation on hover */
   }
 `;
-
 const RightSection = styled.div`
   flex: 2;
   display: flex;
@@ -118,7 +158,7 @@ const RightSection = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: #fff;
   margin-bottom: 1rem;
   text-align: center;
@@ -171,6 +211,14 @@ const Description = styled.p`
   color: #ddd;
   text-align: center;
   margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const CTAButtons = styled.div`
@@ -209,6 +257,59 @@ const HireButton = styled.button`
   }
 `;
 
+// Social Icons Styles
+const SocialIcons = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 1.5rem;
+`;
+
+const SocialLink = styled.a`
+  font-size: 2.5rem;
+  color: #ddd;
+  transition: color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 0 10px;
+
+  &:hover {
+    color: #61dafb;
+    transform: scale(1.3) rotate(10deg);
+    box-shadow: 0 0 15px rgba(97, 218, 251, 0.7),
+                0 0 30px rgba(97, 218, 251, 0.5),
+                0 0 45px rgba(97, 218, 251, 0.3);
+    animation: ${bounceAnimation} 0.8s;
+  }
+
+  &:active {
+    transform: scale(1.1) rotate(0deg);
+    box-shadow: 0 0 8px rgba(97, 218, 251, 0.5);
+  }
+
+  /* For screens smaller than 768px */
+  @media (max-width: 768px) {
+  
+    font-size: 2rem;
+    &:hover {
+      animation: ${bounceAnimation} 0.8s;
+    }
+
+    
+  }
+
+  /* For screens smaller than 480px */
+  @media (max-width: 480px) {
+    font-size: 2rem;
+    margin: 0 5px;
+    margin-top:20px;
+
+    &:hover {
+      animation: ${bounceAnimation} 0.8s;
+    }
+  }
+`;
+
+
+
 // Modal Styles
 const ModalOverlay = styled.div`
   position: fixed;
@@ -226,7 +327,8 @@ const ModalContent = styled.div`
   position: relative;
   background-color: #fff;
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   max-width: 500px;
   width: 100%;
 `;
@@ -239,10 +341,9 @@ const CloseButton = styled.button`
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #000;
-  transition: color 0.3s ease;
+  color: #888;
 
   &:hover {
-    color: #ff0000;
+    color: #000;
   }
 `;

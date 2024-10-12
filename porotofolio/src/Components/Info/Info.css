@@ -1,131 +1,242 @@
-
 .info-container {
- 
-margin-right: 1cm;
-
-}
-.achievement-subgroup {
- 
-
+  padding: 2rem;
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  transition: background 0.5s ease;
 }
 
-
-
-
-.info-section {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
 
-.image-section {
-  max-width: 50%;
+.typing-animation {
+  display: inline-block;
+  border-right: 2px solid;
+  animation: typing 3s steps(22), blink 0.5s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  from, to { border-color: transparent; }
+  50% { border-color: black; }
+}
+
+.education-cards {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  animation: fade-in 1s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.education-card {
+  background: #fff;
+  border-radius: 15px;
   overflow: hidden;
-  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
-.image-section img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-  margin-top: 1cm;
-}
-
-.image-section img:hover {
+.education-card:hover {
   transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-.content-section {
-  max-width: 50%;
+.education-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
-h4 {
-  color: #333;
-  font-size: 40px;
-text-align: center;
-
-color: gold;
-
-
+.education-card:hover .education-image {
+  transform: scale(1.1);
 }
 
-
-
-
-
-ul {
-  list-style: none;
-  padding: 0;
+.education-content {
+  padding: 1rem;
+  text-align: left;
 }
 
-ul li {
-  margin-bottom: 8px;
-  color: #555;
+.more-info-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Responsive styles */
-@media (max-width: 400px) {
-  .info-container {
-    flex-direction: column;
-    text-align: center;
-   background-image: url("https://st4.depositphotos.com/13349494/23275/i/450/depositphotos_232751862-stock-photo-dark-blue-shabby-wooden-background.jpg");
-  }
+.more-info-button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
 
-  .info-section {
-    flex-direction: column;
-    width: 80%;
-    margin-right: 1cm;
-  }
-  .achievement-subgroup{
-    width: max-content;
-    max-height: max-content;
-    margin-top: 20px;
-    margin-left: 0px;
-  }
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 500px;
+  text-align: center;
+  animation: slide-in 0.5s ease;
+}
 
-  .image-section,
-  .content-section {
-    max-width: 100%;
-    margin-bottom: 20px;
-    margin-left: 1cm;
-  }
+@keyframes slide-in {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
 
-  .image-section img{
-    margin-left: 20px;
-   
-   
-  }
+.close-modal-button {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
 
-  h1 {
-    font-size: 1.5rem;
-    
-  }
-  h4{
-    white-space: nowrap;
-    font-size: larger;
-    
-  }
+.close-modal-button:hover {
+  background-color: #c0392b;
+}
+.info-container {
+  padding: 2rem;
+  background: linear-gradient(45deg, #e0eafc, #cfdef3);
+  transition: background 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
 
-  ul li {
-    text-align: center;
+.info-container.dark {
+  background: linear-gradient(45deg, #333, #444);
+  color: #fff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dark-mode-toggle {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.neon-text {
+  color: #39ff14;
+  text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 15px #39ff14;
+}
+
+.card-overlay-gradient {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.8;
+}
+
+.parallax {
+  transition: transform 0.5s ease;
+}
+
+.education-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.education-card:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  animation: ripple-animation 0.6s linear;
+}
+
+@keyframes ripple-animation {
+  from {
+    opacity: 0.4;
+    transform: scale(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(4);
   }
 }
 
-/* Further responsiveness for smaller screens */
-@media (max-width: 480px) {
-  .info-container {
-    margin: 10px;
-  }
+.modal-overlay {
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.3s ease-out;
+}
 
-  h1 {
-    font-size: 1.2rem;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
+  to {
+    opacity: 1;
+  }
+}
 
-  ul li {
-    font-size: 0.9rem;
-  }
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
 }
