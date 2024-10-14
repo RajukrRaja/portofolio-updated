@@ -37,7 +37,7 @@ body {
   position: relative;
   display: inline-block;
   background: linear-gradient(90deg, #61dafb, #21a1f1); /* Gradient text */
-  -webkit-background-clip: text;
+
   -webkit-text-fill-color: transparent;
 }
 

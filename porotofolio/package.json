@@ -2,7 +2,7 @@
   "name": "porotofolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://RajukrRaja.github.io/portofolio-updated",
+  "homepage": "http://RajukrRaja.github.io/portofolio-updated/home",
   "dependencies": {
     "@babel/core": "^7.23.2",
     "@babel/preset-env": "^7.23.2",

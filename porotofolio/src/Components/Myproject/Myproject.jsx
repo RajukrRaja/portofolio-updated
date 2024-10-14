@@ -38,13 +38,14 @@ function MyProject() {
       liveDemo: "https://example.com/trivdenta",
     },
     {
-      title: "CODEBOOSTER: Coding Challenge Platform",
-      description: "Developed an interactive platform for coding challenges. Integrated a real-time coding editor and leaderboards to improve user engagement.",
+      title: "PREPMINT: Preparation Hub",
+      description: "Created a comprehensive platform for exam preparation that includes resources, practice tests, and community features for collaborative learning.",
       techStack: ["React.js", "Node.js", "MongoDB"],
-      img: "https://4kwallpapers.com/images/walls/thumbs_3t/5661.jpg",
-      github: "https://github.com/example/codebooster",
-      liveDemo: "https://example.com/codebooster",
-    },
+      img: "https://example.com/prepmint-image.jpg", // Replace with an actual image link
+      github: "https://github.com/RajukrRaja/kid-center-",
+      liveDemo: "https://rajukrraja.github.io/kid-center-/",
+    }
+    
   ];
 
   return (
