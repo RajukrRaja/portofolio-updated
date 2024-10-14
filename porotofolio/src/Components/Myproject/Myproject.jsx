@@ -1,6 +1,9 @@
+// src/Components/MyProject.js
+
 import React, { useState } from 'react';
 import './Myproject.css';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import prepmintImage from '../Images/image.jpg'; // Corrected relative path
 
 function MyProject() {
   const [isExpanded, setIsExpanded] = useState({});
@@ -15,7 +18,8 @@ function MyProject() {
   const projects = [
     {
       title: "SWAPSHILD: Deep Fake Face Swap Detection",
-      description: "Developed an application using React, Redux, and SCSS to detect deep fake face swaps. The project improved processing speed by 30% through optimized image loading techniques.",
+      description:
+        "Developed an application using React, Redux, and SCSS to detect deep fake face swaps. The project improved processing speed by 30% through optimized image loading techniques.",
       techStack: ["React", "Redux", "SCSS"],
       img: "https://4kwallpapers.com/images/walls/thumbs_3t/5661.jpg",
       github: "https://github.com/example/swapshild",
@@ -23,15 +27,17 @@ function MyProject() {
     },
     {
       title: "SNAPNEST: Social Media Application",
-      description: "Led a hackathon project utilizing HTML, Tailwind CSS, React.js, Node.js, Express.js, and MongoDB. Implemented user authentication and real-time notifications.",
-      techStack: ["HTML", "Tailwind CSS", "React.js", "Node.js", ],
+      description:
+        "Led a hackathon project utilizing HTML, Tailwind CSS, React.js, Node.js, Express.js, and MongoDB. Implemented user authentication and real-time notifications.",
+      techStack: ["HTML", "Tailwind CSS", "React.js", "Node.js"],
       img: "https://4kwallpapers.com/images/walls/thumbs_3t/5661.jpg",
       github: "https://github.com/example/snapnest",
       liveDemo: "https://example.com/snapnest",
     },
     {
       title: "TRIVDENTA: AI Medicine Recommendation",
-      description: "Created an AI-driven application using React.js, Node.js, and MongoDB. Provides real-time medicine recommendations based on user symptoms.",
+      description:
+        "Created an AI-driven application using React.js, Node.js, and MongoDB. Provides real-time medicine recommendations based on user symptoms.",
       techStack: ["React.js", "Node.js", "MongoDB"],
       img: "https://4kwallpapers.com/images/walls/thumbs_3t/5661.jpg",
       github: "https://github.com/example/trivdenta",
@@ -39,13 +45,13 @@ function MyProject() {
     },
     {
       title: "PREPMINT: Preparation Hub",
-      description: "Created a comprehensive platform for exam preparation that includes resources, practice tests, and community features for collaborative learning.",
+      description:
+        "Created a comprehensive platform for exam preparation that includes resources, practice tests, and community features for collaborative learning.",
       techStack: ["React.js", "Node.js", "MongoDB"],
-      img: "https://example.com/prepmint-image.jpg", // Replace with an actual image link
+      img: prepmintImage, // Imported local image
       github: "https://github.com/RajukrRaja/kid-center-",
       liveDemo: "https://rajukrraja.github.io/kid-center-/",
-    }
-    
+    },
   ];
 
   return (
@@ -55,10 +61,30 @@ function MyProject() {
       </div>
       <div className="project-grid">
         {projects.map((project, index) => (
-          <div key={index} className="project-card" onClick={() => toggleExpand(index)}>
+          <div
+            key={index}
+            className="project-card"
+            onClick={() => toggleExpand(index)}
+          >
             <div className="card-inner">
               <div className="project-image-container">
-                <img src={project.img} alt={project.title} className="project-image" />
+                {/* Wrap the image in an <a> tag to make it clickable */}
+                <a
+                  href={project.liveDemo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()} // Prevents card toggle
+                >
+                  <img
+                    src={project.img}
+                    alt={`Screenshot of ${project.title}`}
+                    className="project-image"
+                    onError={(e) => {
+                      e.target.onerror = null; // Prevents infinite loop
+                      e.target.src = 'https://via.placeholder.com/300x200?text=Image+Unavailable'; // Fallback image
+                    }}
+                  />
+                </a>
                 <div className="image-overlay">
                   <h2>{project.title}</h2>
                 </div>
@@ -71,18 +97,30 @@ function MyProject() {
                     </span>
                   ))}
                 </div>
-                <p className={`project-description ${isExpanded[index] ? 'expanded' : ''}`}>
+                <p
+                  className={`project-description ${
+                    isExpanded[index] ? 'expanded' : ''
+                  }`}
+                >
                   {project.description}
                 </p>
                 <button className="view-details-button">
-                  {isExpanded[index] ? "Hide Details" : "View Details"}
+                  {isExpanded[index] ? 'Hide Details' : 'View Details'}
                 </button>
                 {isExpanded[index] && (
                   <div className="project-links">
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <FaGithub /> GitHub
                     </a>
-                    <a href={project.liveDemo} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={project.liveDemo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <FaExternalLinkAlt /> Live Demo
                     </a>
                   </div>
@@ -92,7 +130,6 @@ function MyProject() {
           </div>
         ))}
       </div>
-     
     </div>
   );
 }
