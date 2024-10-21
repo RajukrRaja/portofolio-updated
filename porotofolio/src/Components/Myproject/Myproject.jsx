@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import './Myproject.css';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import prepmintImage from '../Images/image.jpg'; // Corrected relative path
-import brokerFree from "../Images/image1.jpg"
+import  brokerFree from '../Images/image.jpg'; // Corrected relative path
+import prepmintImage from "../Images/image1.jpg"
 
 function MyProject() {
   const [isExpanded, setIsExpanded] = useState({});
