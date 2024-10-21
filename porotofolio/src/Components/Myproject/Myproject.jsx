@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import './Myproject.css';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import prepmintImage from '../Images/image.jpg'; // Corrected relative path
+import brokerFree from "../Images/image1.jpg"
 
 function MyProject() {
   const [isExpanded, setIsExpanded] = useState({});
@@ -35,14 +36,14 @@ function MyProject() {
       liveDemo: "https://example.com/snapnest",
     },
     {
-      title: "TRIVDENTA: AI Medicine Recommendation",
-      description:
-        "Created an AI-driven application using React.js, Node.js, and MongoDB. Provides real-time medicine recommendations based on user symptoms.",
+      title: "BrokerFree: A Real Estate Web Application",
+      description: "Created an AI-driven application using React.js, Node.js, and MongoDB. Provides real-time property listings and recommendations based on user preferences.",
       techStack: ["React.js", "Node.js", "MongoDB"],
-      img: "https://4kwallpapers.com/images/walls/thumbs_3t/5661.jpg",
-      github: "https://github.com/example/trivdenta",
-      liveDemo: "https://example.com/trivdenta",
+      img: brokerFree, // Ensure 'brokerFree' is defined as a valid image import
+      github: "https://github.com/RajukrRaja/real-state-web-application",
+      liveDemo: "https://rajukrraja.github.io/real-state-web-application/"
     },
+    
     {
       title: "PREPMINT: Preparation Hub",
       description:
