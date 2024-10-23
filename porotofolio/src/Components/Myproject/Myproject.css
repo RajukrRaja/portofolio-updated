@@ -2,7 +2,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background: linear-gradient(135deg, #f0f0f0, #ffffff);
+
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
@@ -22,7 +22,7 @@
 }
 
 .project-card {
-  background: #eaebef;
+
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(145, 5, 188, 0.3);
@@ -245,7 +245,7 @@ h2 {
   font-size: 0.9rem;
   color: #666;
   padding: 10px 0; /* Padding for better spacing */
-  background: rgba(255, 255, 255, 0.9); /* Light background for footer */
+ 
   border-top: 1px solid #ddd; /* Top border for separation */
 }
 

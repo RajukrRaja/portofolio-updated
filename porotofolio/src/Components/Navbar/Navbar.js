@@ -64,7 +64,7 @@ const Navbar = () => {
             </DropdownContent>
           </Dropdown>
           <NavLink to="/contact">Contact</NavLink>
-          <NavLink to="/more">More</NavLink>
+          <NavLink to="/MyBlog">Blogs</NavLink>
         </NavMenu>
         <NavIcons>
           <ThemeToggle onClick={toggleDarkMode}>

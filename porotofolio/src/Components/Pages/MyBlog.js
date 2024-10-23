@@ -1,69 +1,244 @@
-import React from 'react';
-import './MyBlog.css';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { io } from "socket.io-client";
+import axios from "axios";
+import { FaComment, FaThumbsUp, FaEdit, FaTrash } from "react-icons/fa";
+import { Picker } from "emoji-mart";
+import "emoji-mart/css/emoji-mart.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import './Blog.css';
 
-const blogs = [
-  {
-    id: 0,
-    title: 'Science and Tech',
-    content: `Science and technology are the driving forces behind the progress of human civilization. These two domains have shaped the world in ways unimaginable just a few decades ago. Let's dive into the fascinating world of science and technology.`,
-    fullContent: `Science and technology are the driving forces behind the progress of human civilization. These two domains have shaped the world in ways unimaginable just a few decades ago. 
-    Science and technology are the dynamic duo that has been shaping the world as we know it. These two fields have had a profound impact on society, revolutionizing the way we live, work, and communicate. 
-    In this blog post, we'll explore the intricate relationship between science and technology and how they continue to drive progress and innovation.`,
+// Custom styles
+const styles = {
+  container: {
+    padding: "20px",
+    backgroundColor: "#f8f9fa",
+    borderRadius: "10px",
+    boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",
+    marginTop: "2cm",
+    maxWidth: "900px",
+ 
+    
   },
-  {
-    id: 1,
-    title: 'Good Morning IT Industry',
-    content: `Good Morning, IT Industry! It's a new day in the world of technology and innovation. With the sun rising on the horizon, we are reminded of the endless possibilities that lie ahead in the IT sector.`,
-    fullContent: `Good Morning, IT Industry! It's a new day in the world of technology and innovation. With the sun rising on the horizon, we are reminded of the endless possibilities that lie ahead in the IT sector. 
-    The IT industry plays a vital role in our modern lives. From the software that powers our smartphones to the infrastructure that enables the internet, IT is the backbone of our digital world. 
-    As we sip our morning coffee and log in to our workstations, we become a part of this dynamic and ever-evolving industry. The IT professionals around the globe work tirelessly to keep the wheels of technology turning. 
-    From coding the latest applications to securing our online data, the contributions of IT experts are immeasurable. The world of IT is not just about computers and code; it's about creativity, problem-solving, and pushing the boundaries of what's possible. 
-    It's a world where innovation never sleeps, and every day brings new challenges and opportunities. So, as we start our day in the IT industry, let's embrace the excitement of the unknown and the satisfaction of solving complex problems. 
-    Let's continue to drive progress and shape the future. Good morning, IT industry. The world is counting on you!`,
+  postContainer: {
+    marginBottom: "30px",
+    padding: "20px",
+    border: "1px solid #ddd",
+    borderRadius: "12px",
+    backgroundColor: "#fff",
+    position: "relative",
   },
-  {
-    id: 2,
-    title: 'Blog Post 2',
-    content: 'This is the content of Blog Post 2.',
-    fullContent: 'This is the full content of Blog Post 2. It provides in-depth information about the topic discussed in the blog post.',
+  commentBox: {
+    padding: "15px",
+    border: "1px solid #ddd",
+    borderRadius: "8px",
+    marginTop: "10px",
+    backgroundColor: "#f1f1f1",
   },
-  {
-    id: 3,
-    title: 'Blog Post 3',
-    content: 'This is the content of Blog Post 3. It talks about another interesting subject. Click on Read More to see more details.',
-    fullContent: 'This is the full content of Blog Post 3. It delves deeper into the subject and provides comprehensive information.',
+  button: {
+    padding: "10px 20px",
+    margin: "10px",
+    background: "#007bff",
+    color: "#fff",
+    borderRadius: "6px",
+    border: "none",
+    cursor: "pointer",
+    transition: "background 0.3s",
   },
-  {
-    id: 4,
-    title: 'Blog Post 4',
-    content: 'This is the content of Blog Post 4. It discusses yet another topic. Read More to explore the full content of this blog post.',
-    fullContent: 'This is the full content of Blog Post 4. It contains extensive information about the topic covered in the blog post.',
+  buttonHover: {
+    background: "#0056b3",
   },
-];
+  emojiPicker: {
+    position: "absolute",
+    bottom: "60px",
+    right: "20px",
+  },
+};
 
-const Blog = ({ title, content, fullContent }) => {
-  const [isExpanded, setIsExpanded] = React.useState(false);
+// Socket.IO connection
+const socket = io("http://localhost:5000", { transports: ["websocket", "polling"], reconnection: true });
 
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
+const Blog = () => {
+  const [posts, setPosts] = useState([]);
+  const [newPost, setNewPost] = useState("");
+  const [newComments, setNewComments] = useState({});
+  const [likes, setLikes] = useState({});
+  const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(null);
+  const [editedContent, setEditedContent] = useState("");
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/posts");
+        if (Array.isArray(res.data)) {
+          setPosts(res.data);
+        } else {
+          console.error("Fetched data is not an array:", res.data);
+        }
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchPosts();
+
+    // Socket event listeners
+    socket.on("newPost", (post) => setPosts((prev) => [post, ...prev]));
+    socket.on("newComment", (postId, comment) => {
+      setPosts((prev) =>
+        prev.map((post) =>
+          post._id === postId ? { ...post, comments: [...post.comments, comment] } : post
+        )
+      );
+    });
+    socket.on("likeUpdate", (postId) => {
+      setLikes((prev) => ({ ...prev, [postId]: (prev[postId] || 0) + 1 }));
+    });
+
+    return () => {
+      socket.off("newPost");
+      socket.off("newComment");
+      socket.off("likeUpdate");
+    };
+  }, []);
+
+  const handlePostSubmit = async (e) => {
+    e.preventDefault();
+    if (newPost.trim()) {
+      try {
+        const res = await axios.post("http://localhost:5000/api/posts", { content: newPost });
+        setNewPost("");
+        socket.emit("addPost", res.data);
+      } catch (error) {
+        console.error("Error creating post:", error);
+      }
+    }
+  };
+
+  const handleLike = (postId) => {
+    socket.emit("like", postId);
+  };
+
+  const handleEditPost = async (postId) => {
+    try {
+      await axios.put(`http://localhost:5000/api/posts/${postId}`, { content: editedContent });
+      setPosts((prev) =>
+        prev.map((post) =>
+          post._id === postId ? { ...post, content: editedContent } : post
+        )
+      );
+      setIsEditing(null);
+    } catch (error) {
+      console.error("Error editing post:", error);
+    }
+  };
+
+  const handleDeletePost = async (postId) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/posts/${postId}`);
+      setPosts((prev) => prev.filter((post) => post._id !== postId));
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  };
+
+  // Adding comment functionality
+  const handleCommentSubmit = async (e, postId) => {
+    e.preventDefault();
+    const comment = newComments[postId]?.trim();
+    if (comment) {
+      try {
+        const res = await axios.post(`http://localhost:5000/api/posts/${postId}/comments`, { text: comment });
+        socket.emit("addComment", postId, res.data);
+        setNewComments((prev) => ({ ...prev, [postId]: "" }));
+      } catch (error) {
+        console.error("Error submitting comment:", error);
+      }
+    }
+  };
+
+  const handleCommentChange = (e, postId) => {
+    setNewComments((prev) => ({ ...prev, [postId]: e.target.value }));
+  };
+
+  const handleEmojiSelect = (emoji) => {
+    setNewPost((prev) => prev + emoji.native);
+    setIsEmojiPickerOpen(false);
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const res = await axios.post("http://localhost:5000/api/upload", formData);
+      setNewPost((prev) => prev + `![image](${res.data.url})`);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
   };
 
   return (
-    <div className="blog">
-      <h2>{title}</h2>
-      {isExpanded ? <p>{fullContent}</p> : <p>{content}</p>}
-      <button onClick={toggleExpand}>{isExpanded ? 'Show Less' : 'Read More'}</button>
+    <div style={styles.container}>
+      <form onSubmit={handlePostSubmit} style={{ marginBottom: "20px" }}>
+        <ReactQuill
+          value={newPost}
+          onChange={setNewPost}
+          placeholder="Write a new post..."
+        />
+        <button type="submit" style={styles.button}>Submit Post</button>
+        <button onClick={() => setIsEmojiPickerOpen(!isEmojiPickerOpen)} style={styles.button}>
+          😊 Add Emoji
+        </button>
+        <input type="file" onChange={handleImageUpload} style={{ marginTop: "10px" }} />
+        {isEmojiPickerOpen && <Picker onSelect={handleEmojiSelect} style={styles.emojiPicker} />}
+      </form>
+
+      {Array.isArray(posts) && posts.map((post) => (
+        <motion.div key={post._id} style={styles.postContainer} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+          {isEditing === post._id ? (
+            <div>
+              <ReactQuill value={editedContent} onChange={setEditedContent} />
+              <button onClick={() => handleEditPost(post._id)} style={styles.button}>Save</button>
+            </div>
+          ) : (
+            <>
+              <h2 dangerouslySetInnerHTML={{ __html: post.content }}></h2>
+              <motion.button style={styles.button} onClick={() => handleLike(post._id)}>
+                <FaThumbsUp /> Like ({likes[post._id] || post.likes})
+              </motion.button>
+              <button onClick={() => { setIsEditing(post._id); setEditedContent(post.content); }} style={styles.button}>
+                <FaEdit /> Edit
+              </button>
+              <button onClick={() => handleDeletePost(post._id)} style={styles.button}>
+                <FaTrash /> Delete
+              </button>
+            </>
+          )}
+          <h3>Comments:</h3>
+          {post.comments.map((comment, index) => (
+            <div key={index} style={styles.commentBox}>
+              <p><strong>{comment.user}</strong>: {comment.text}</p>
+              <span>{new Date(comment.timestamp).toLocaleTimeString()}</span>
+            </div>
+          ))}
+          <form onSubmit={(e) => handleCommentSubmit(e, post._id)} style={{ marginTop: "15px" }}>
+            <input
+              type="text"
+              value={newComments[post._id] || ""}
+              onChange={(e) => handleCommentChange(e, post._id)}
+              placeholder="Add a comment"
+              style={{ width: "80%", padding: "10px", borderRadius: "5px", border: "1px solid #ddd" }}
+            />
+            <button type="submit" style={styles.button}>Submit</button>
+          </form>
+        </motion.div>
+      ))}
     </div>
   );
 };
 
-const MyBlog = () => (
-  <div className="blogs">
-    <h1>My Blog - My Opinion</h1> {/* Updated heading */}
-    {blogs.map((blog) => (
-      <Blog key={blog.id} title={blog.title} content={blog.content} fullContent={blog.fullContent} />
-    ))}
-  </div>
-);
-
-export default MyBlog;
+export default Blog;

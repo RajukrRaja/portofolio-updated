@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import './Info.css';
+import MatricPhoto from "../Images/matric.jpg"
 
 function Info() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -41,7 +42,7 @@ function Info() {
             title: 'Matriculation (10th Standard)',
             school: 'High school sarathua | BSEB',
             duration: '2018-2019 | Completed',
-            image: 'https://lh3.googleusercontent.com/p/AF1QipPn5xJ_TYkySSYC--IJCUBbDKkKCw2ZE489zmvD=s1360-w1360-h1020',
+            image: MatricPhoto,
             cgpa: '7.5',
           },
         ].map((education, index) => (

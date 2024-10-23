@@ -22,8 +22,8 @@ const Sidebar = ({ toggleSidebar }) => {
         <NavLink to="/contact" onClick={toggleSidebar}>
           Contact
         </NavLink>
-        <NavLink to="/more" onClick={toggleSidebar}>
-          More
+        <NavLink to="/MyBlog" onClick={toggleSidebar}>
+          MyBlog
         </NavLink>
       </SidebarMenu>
     </SidebarContainer>

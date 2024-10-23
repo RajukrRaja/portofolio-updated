@@ -9,6 +9,7 @@ import Myproject from './Components/Myproject/Myproject';
 import Footer from './Components/Footer/Footer';
 import Info from './Components/Info/Info';
 import Skill from './Components/skill/skill';
+import MyBlog from "./Components/Pages/MyBlog"
 // Optional: Create a NotFound component
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/myproject" element={<Myproject />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/MyBlog" element={<MyBlog />} />
         {/* Redirect to home if route not found */}
         
       </Routes>
