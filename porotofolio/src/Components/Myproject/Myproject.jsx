@@ -5,6 +5,7 @@ import './Myproject.css';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import  brokerFree from '../Images/image.jpg'; // Corrected relative path
 import prepmintImage from "../Images/image1.jpg"
+import DeeepfakeImage  from "../Images/Deepfake.png"
 
 function MyProject() {
   const [isExpanded, setIsExpanded] = useState({});
@@ -22,16 +23,16 @@ function MyProject() {
       description:
         "Developed an application using React, Redux, and SCSS to detect deep fake face swaps. The project improved processing speed by 30% through optimized image loading techniques.",
       techStack: ["React", "Redux", "SCSS"],
-      img: "https://4kwallpapers.com/images/walls/thumbs_3t/5661.jpg",
-      github: "https://github.com/example/swapshild",
-      liveDemo: "https://example.com/swapshild",
+      img: DeeepfakeImage,
+      github: "https://github.com/RajukrRaja/Deepfake-face-detect",
+      liveDemo: "https://milanroy704.github.io/Deepfake-face-detect/",
     },
     {
       title: "SNAPNEST: Social Media Application",
       description:
         "Led a hackathon project utilizing HTML, Tailwind CSS, React.js, Node.js, Express.js, and MongoDB. Implemented user authentication and real-time notifications.",
       techStack: ["HTML", "Tailwind CSS", "React.js", "Node.js"],
-      img: "https://4kwallpapers.com/images/walls/thumbs_3t/5661.jpg",
+      img: "",
       github: "https://github.com/example/snapnest",
       liveDemo: "https://example.com/snapnest",
     },
